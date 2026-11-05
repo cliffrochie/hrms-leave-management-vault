@@ -1,0 +1,224 @@
+{
+  "main": {
+    "id": "a1b15bd41b78d7ae",
+    "type": "split",
+    "children": [
+      {
+        "id": "b24fff086d6112a0",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "63c3e0be4f5078ab",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f0ab461af4e17ab7",
+    "type": "split",
+    "children": [
+      {
+        "id": "c74be1b2089a3e05",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "db8feee10dad18d4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "28289366e790eb6e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8380c4cf3ca57f79",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 398.61024475097656
+  },
+  "right": {
+    "id": "13a3618c50baa390",
+    "type": "split",
+    "children": [
+      {
+        "id": "e329edb4e9b5e84f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "040b110f9cce971b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "1cbf73bdde05c109",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "89359df13b71bf6a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b6687e1e67e87684",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "d0850086a4b88f57",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "mermaid-tools:Open Mermaid Toolbar": false
+    }
+  },
+  "active": "63c3e0be4f5078ab",
+  "lastOpenFiles": [
+    "Phase 3 - Comprehensive System Breakdown & Process Flows 1.png",
+    "system-flow/flow-chart/Process 6 - Leave Application Submission & Validation (CS Form No. 6).png",
+    "system-flow/flow-chart/Phase 3 - Comprehensive System Breakdown & Process Flows 1.png",
+    "Phase 3 - Comprehensive System Breakdown & Process Flows.png",
+    "system-flow/Phase 3 - High-Level System Flow v5.png",
+    "system-flow/Phase 3 - Comprehensive System Breakdown & Process Flows.md",
+    "Phase 3 - Comprehensive System Breakdown & Process Flows 2.png",
+    "gathered-data/Phase 3 - Types of Leave.md",
+    "doc-templates/~$forms__application-for-leave-form.xlsx",
+    "gathered-data/Phase 3 - Enhanced Gathered Data & System Specification.md",
+    "system-flow/flow-chart/Process 5 - Batch Calamity Leave Crediting (Special Emergency Leave - SEL).png",
+    "system-flow/flow-chart/Process 3 - Standard Monthly Accrual & LWOP Proration Engine.png",
+    "system-flow/flow-chart/Process 2 - Actual Leave Credits Dashboard (Single-Pane View).png",
+    "system-flow/flow-chart/Process 1 - Employee Leave Catalog & Requirements Inquiry.png",
+    "system-flow/flow-chart/Process 7 - 5-Tier Review, Certification & Approval Workflow.png",
+    "legal-basis/Omnibus Rules on Leave.pdf",
+    "legal-basis/Expanded Maternity Leave - CSC Resolution No. 2100020 dated 07 January 2021.pdf",
+    "legal-basis/CSC-DBM Join Circular No. 1, s. 2006.pdf",
+    "legal-basis/CSC Resolution No. 051206.pdf",
+    "legal-basis/CSC MC No. 25, s. 2010.pdf",
+    "legal-basis/CSC MC No. 16, s. 2012.pdf",
+    "legal-basis/CSC MC No. 12, s. 2007.pdf",
+    "legal-basis/Amendments on Omnibus Rules on Leave.pdf",
+    "lofi-wireframes/README.md",
+    "~$Phase 3 Leave Management – System Breakdown.pptx",
+    "gathered-data/backup/Phase 3 - Gathered Data - 10_15_2026.md",
+    "gathered-data/backup/Phase 3 - Gathered Data - 10_15_2026.bak.md",
+    "gathered-data/types-of-leave.md",
+    "types-of-leave.md",
+    "wireframes/README.md",
+    "design/views/module-1-leave-credits/README.md",
+    "design/views/module-5-integrations/README.md",
+    "design/views/module-4-reports/README.md",
+    "design/views/module-3-leave-data/README.md",
+    "design/views/module-2-leave-applications/README.md",
+    "design/README.md"
+  ]
+}

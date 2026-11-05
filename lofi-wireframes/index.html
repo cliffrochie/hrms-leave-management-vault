@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leave Mgmt Wireframes</title>
+<style>
+  /* ---------- Low-fidelity box wireframe kit (grayscale only) ---------- */
+  :root { --ink:#222; --line:#555; --soft:#999; --fill:#eee; --fill2:#f7f7f7; --paper:#fff; --red:#c00; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:13px/1.4 "Courier New", Courier, monospace; color:var(--ink); background:#ddd; }
+  a { color:inherit; }
+  .page { display:grid; grid-template-columns:240px 1fr; min-height:100vh; }
+  .toc { position:sticky; top:0; height:100vh; overflow:auto; background:var(--paper); border-right:2px solid var(--ink); padding:12px; }
+  .toc h1 { font-size:14px; margin:0 0 4px; }
+  .toc p { margin:0 0 12px; color:var(--soft); font-size:11px; }
+  .toc b { display:block; margin:12px 0 4px; font-size:11px; text-transform:uppercase; }
+  .toc a { display:block; padding:2px 4px; text-decoration:none; font-size:12px; }
+  .toc a:hover { background:var(--fill); }
+  main { padding:24px; }
+  @media (max-width:900px){ .page{grid-template-columns:1fr} .toc{position:static;height:auto} }
+
+  /* screen card */
+  .screen { background:var(--paper); border:2px solid var(--ink); margin:0 0 32px; }
+  .screen > header { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:baseline; padding:8px 12px; border-bottom:2px solid var(--ink); background:var(--fill); }
+  .screen > header h2 { margin:0; font-size:15px; }
+  .screen > header .meta { color:#444; font-size:11px; }
+  .screen > .body { display:grid; grid-template-columns:1fr 260px; }
+  @media (max-width:1200px){ .screen > .body{grid-template-columns:1fr} }
+  .notes { border-left:2px dashed var(--line); padding:12px; font-size:12px; background:var(--fill2); }
+  .notes h4 { margin:0 0 8px; font-size:12px; text-transform:uppercase; }
+  .notes ol { margin:0; padding-left:20px; } .notes li { margin-bottom:6px; }
+
+  /* app frame */
+  .frame { margin:12px; border:1px solid var(--ink); min-width:0; }
+  .topbar { display:flex; align-items:center; gap:8px; padding:6px 8px; border-bottom:1px solid var(--ink); }
+  .appnav { border-right:1px solid var(--ink); padding:6px; font-size:11px; }
+  .appnav div { padding:3px 4px; border:1px solid transparent; }
+  .appnav .grp { margin-top:6px; font-weight:bold; }
+  .appnav .on { border-color:var(--ink); background:var(--fill); font-weight:bold; }
+  .shell { display:grid; grid-template-columns:150px 1fr; }
+  .content { padding:10px; min-width:0; }
+  @media (max-width:700px){ .shell{grid-template-columns:1fr} .appnav{display:none} }
+
+  /* primitives */
+  .box { border:1px solid var(--line); padding:8px; margin-bottom:8px; }
+  .box > .t { font-weight:bold; margin-bottom:6px; }
+  .dash { border-style:dashed; }
+  .ph { border:1px solid var(--line); min-height:40px; display:flex; align-items:center; justify-content:center; color:var(--soft);
+        background:linear-gradient(to top right,transparent calc(50% - .5px),var(--soft),transparent calc(50% + .5px)),
+                   linear-gradient(to bottom right,transparent calc(50% - .5px),var(--soft),transparent calc(50% + .5px)); }
+  .ph span { background:var(--paper); padding:0 4px; }
+  .row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .row > .grow { flex:1; }
+  .g2,.g3,.g4 { display:grid; gap:8px; }
+  .g2 { grid-template-columns:repeat(2,1fr); } .g3 { grid-template-columns:repeat(3,1fr); } .g4 { grid-template-columns:repeat(4,1fr); }
+  @media (max-width:700px){ .g2,.g3,.g4{grid-template-columns:1fr} }
+  .btn { display:inline-block; border:1px solid var(--ink); padding:3px 10px; background:var(--paper); white-space:nowrap; }
+  .btn.p { background:var(--ink); color:var(--paper); }
+  .in { border:1px solid var(--line); padding:3px 6px; min-width:120px; color:var(--soft); background:var(--paper); }
+  .in.sel::after { content:" ▾"; float:right; color:var(--ink); }
+  .in.ta { min-height:48px; }
+  .lbl { font-size:11px; margin-bottom:2px; }
+  .fld { margin-bottom:6px; }
+  .chip { display:inline-block; border:1px solid var(--line); border-radius:10px; padding:0 8px; font-size:11px; }
+  .chip.on { background:var(--ink); color:var(--paper); }
+  .tabs { display:flex; border-bottom:1px solid var(--ink); margin-bottom:8px; }
+  .tabs span { padding:3px 10px; border:1px solid var(--line); border-bottom:none; margin-right:-1px; }
+  .tabs .on { background:var(--ink); color:var(--paper); }
+  table { width:100%; border-collapse:collapse; font-size:11px; }
+  th,td { border:1px solid var(--line); padding:3px 5px; text-align:left; vertical-align:top; }
+  th { background:var(--fill); }
+  .scroll { overflow-x:auto; }
+  .red { color:var(--red); }
+  .big { font-size:20px; font-weight:bold; }
+  .muted { color:var(--soft); }
+  .warn { border:2px solid var(--ink); padding:6px; margin-bottom:8px; }
+  .wm { border:2px dashed var(--red); color:var(--red); text-align:center; font-weight:bold; letter-spacing:3px; padding:4px; margin:4px 0; }
+  .modal { border:2px solid var(--ink); box-shadow:6px 6px 0 var(--soft); background:var(--paper); padding:8px; margin:12px auto; max-width:560px; }
+  .modal > .t { display:flex; justify-content:space-between; font-weight:bold; border-bottom:1px solid var(--ink); padding-bottom:4px; margin-bottom:8px; }
+  .steps { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px; }
+  .steps div { flex:1; min-width:90px; border:1px solid var(--line); padding:4px; font-size:11px; text-align:center; }
+  .steps .done { background:var(--fill); }
+  .steps .cur { border:2px solid var(--ink); font-weight:bold; }
+  .n { display:inline-block; width:16px; height:16px; border-radius:50%; background:var(--ink); color:var(--paper); font-size:10px; text-align:center; line-height:16px; margin-right:2px; }
+  .right { margin-left:auto; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ================= TABLE OF CONTENTS ================= -->
+<nav class="toc">
+  <h1>CGB-HRMS Phase 3<br>Leave Management</h1>
+  <p>Low-fidelity box wireframes · grayscale · v1</p>
+  <a href="#legend">Legend &amp; Sitemap</a>
+  <a href="#s00">00 Home Dashboard</a>
+  <b>1.1 Employee Leave Credits</b>
+  <a href="#s01">01 Leave Types Catalog</a>
+  <a href="#s02">02 Leave Type Details (modal)</a>
+  <a href="#s03">03 My Leave Credits (Single Pane)</a>
+  <a href="#s04">04 Crediting – Automated Runs</a>
+  <a href="#s05">05 Crediting – Calamity Batch</a>
+  <b>1.2 Leave Applications</b>
+  <a href="#s06">06 My Applications</a>
+  <a href="#s07">07 File Leave (CS Form 6)</a>
+  <a href="#s07a">07A Form – Common Data Inventory</a>
+  <a href="#s07b">07B Form – Common Base</a>
+  <a href="#s08">08 Monetization / TLB variant</a>
+  <a href="#s09">09 Application Details</a>
+  <a href="#s10">10 Approval Queue</a>
+  <a href="#s11">11 Review &amp; Act (7.A–7.D)</a>
+  <a href="#s12">12 Modify Approved Leave</a>
+  <a href="#s13">13 Recall Request (Dept Head)</a>
+  <b>1.3 Leave Data Management</b>
+  <a href="#s14">14 Credits Management</a>
+  <a href="#s15">15 Leave Ledger Card</a>
+  <a href="#s16">16 COC / CTO Ledger</a>
+  <a href="#s17">17 Overtime &amp; Time Offset (COS/JO)</a>
+  <b>1.4 Reports</b>
+  <a href="#s18">18 MRATU / SRATU</a>
+  <a href="#s19">19 Certifications</a>
+  <a href="#s20">20 Work Schedule &amp; DTR Rectification</a>
+  <b>Settings &amp; Alerts</b>
+  <a href="#s21">21 Holiday Calendar</a>
+  <a href="#s22">22 Alternate Signatory (OIC)</a>
+  <a href="#s23">23 Alerts (AWOL / NOSI)</a>
+  <a href="#s24">24 Leave Type Setup – List</a>
+  <a href="#s25">25 Leave Type Builder</a>
+</nav>
+
+<main>
+
+<!-- shared app shell; JS clones it into every .frame -->
+<template id="shell">
+  <div class="topbar">
+    <div class="ph" style="width:40px;min-height:24px"><span>logo</span></div>
+    <b>CGB-HRMS · Leave Management</b>
+    <span class="right in sel" style="min-width:150px">Role: <span class="role"></span></span>
+    <span class="btn">🔔 3</span>
+    <span class="btn">Juan D. Cruz ▾</span>
+  </div>
+  <div class="shell">
+    <div class="appnav">
+      <div data-k="home">Home</div>
+      <div class="grp">1.1 Leave Credits</div>
+      <div data-k="types">Leave Types</div>
+      <div data-k="credits">My Credits</div>
+      <div data-k="crediting">Crediting*</div>
+      <div class="grp">1.2 Applications</div>
+      <div data-k="apps">My Applications</div>
+      <div data-k="file">File Leave</div>
+      <div data-k="queue">Approval Queue*</div>
+      <div data-k="modify">Modifications</div>
+      <div class="grp">1.3 Data Mgmt</div>
+      <div data-k="cm">Credits Mgmt*</div>
+      <div data-k="ledger">Leave Ledger</div>
+      <div data-k="coc">COC / ETO Ledger</div>
+      <div class="grp">1.4 Reports</div>
+      <div data-k="rpt">Compliance</div>
+      <div data-k="cert">Certifications</div>
+      <div data-k="sched">Schedules &amp; DTR</div>
+      <div class="grp">Admin</div>
+      <div data-k="ltsetup">Leave Type Setup*</div>
+      <div data-k="hol">Holiday Calendar*</div>
+      <div data-k="oic">Alt. Signatory*</div>
+      <div data-k="alerts">Alerts</div>
+      <div class="muted" style="margin-top:6px">* role-gated</div>
+    </div>
+    <div class="content"></div>
+  </div>
+</template>
+
+<!-- ================= LEGEND ================= -->
+<section class="screen" id="legend">
+  <header><h2>Legend &amp; Sitemap</h2><span class="meta">How to read these wireframes</span></header>
+  <div class="body">
+    <div style="padding:12px">
+      <div class="g3">
+        <div class="box"><div class="t">Elements</div>
+          <div class="fld"><span class="btn p">Primary</span> <span class="btn">Secondary</span></div>
+          <div class="fld"><span class="in">Text input</span></div>
+          <div class="fld"><span class="in sel">Dropdown</span></div>
+          <div class="fld"><span class="chip on">Active</span> <span class="chip">Filter chip</span></div>
+          <div class="ph" style="height:40px"><span>image / chart / file</span></div>
+        </div>
+        <div class="box"><div class="t">Conventions</div>
+          <div class="fld"><span class="red">Red text</span> = statutory red-font rule (late filing, tardiness, UT, LWOP, disapproval)</div>
+          <div class="wm">LATE FILING</div>
+          <div class="fld"><span class="n">1</span> = annotation, explained in the right column</div>
+          <div class="box dash" style="margin:0">Dashed box = conditional / role-gated area</div>
+        </div>
+        <div class="box"><div class="t">Roles</div>
+          <div>EMP – Employee (ESS)</div><div>AO – Dept Admin Officer</div><div>DH – Department Head</div>
+          <div>CHRMO – HR Admin</div><div>APR – Mayor / Vice Mayor / OIC</div>
+          <div class="muted" style="margin-top:6px">Track A = Plantilla/Casual (CS Form 6)<br>Track B = COS/JO (Time Offset)</div>
+        </div>
+      </div>
+      <div class="box"><div class="t">Sitemap (mirrors System Flow v5)</div>
+<pre style="margin:0;font-size:11px;white-space:pre-wrap">1. LEAVE MANAGEMENT
+├─ 1.1 Employee Leave Credits ─ 01 Types · 02 Type details · 03 Single pane · 04/05 Crediting (auto / manual)
+├─ 1.2 Leave Applications ──── 06 List · 07/08 Create · 09 Details · 10/11 5-tier approval · 12/13 Modify
+├─ 1.3 Leave Data Management ─ 14 Credits mgmt · 15 Leave ledger · 16 COC/CTO · 17 ETO (COS/JO)
+├─ 1.4 Reports ─────────────── 18 MRATU/SRATU · 19 Certificates · 20 Schedule &amp; DTR
+└─ Admin / Integrations ────── 21 Holidays · 22 OIC signatory · 23 AWOL &amp; NOSI alerts</pre>
+      </div>
+    </div>
+    <aside class="notes"><h4>Notes</h4><ol>
+      <li>Every screen card lists its System Flow v5 box, related process, and roles.</li>
+      <li>The same app shell (top bar + left nav) is shared by all screens. The nav item for the current screen is highlighted.</li>
+      <li>The role dropdown in the top bar is only there to show RBAC differences in the wireframes. The real app derives the role from the user's account.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 00 HOME ================= -->
+<section class="screen" id="s00" data-nav="home" data-role="Employee">
+  <header><h2>00 · Home Dashboard</h2><span class="meta">Entry point · Roles: all (widgets vary by role)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">Good morning, Juan</span><span class="btn p">+ File Leave</span><span class="btn">View Leave Types</span></div>
+      <div class="g4">
+        <div class="box"><div class="t">VL <span class="n">1</span></div><div class="big">14.250</div><div class="muted">days</div></div>
+        <div class="box"><div class="t">SL</div><div class="big">22.500</div><div class="muted">days</div></div>
+        <div class="box"><div class="t">Forced Leave</div><div class="big">3 / 5</div><div class="muted">remaining this yr</div></div>
+        <div class="box"><div class="t">CTO</div><div class="big">16 h</div><div class="muted">8 h expire 03/2027</div></div>
+      </div>
+      <div class="g2">
+        <div class="box"><div class="t">My Recent Applications <span class="n">2</span></div>
+          <table><tr><th>Ref</th><th>Type</th><th>Dates</th><th>Status</th></tr>
+          <tr><td>LA-0412</td><td>VL</td><td>Nov 3–5</td><td>Recommended</td></tr>
+          <tr><td>LA-0398</td><td>SL</td><td>Oct 6</td><td>Approved</td></tr>
+          <tr><td>LA-0371</td><td>SPL</td><td>Sep 12</td><td>Approved</td></tr></table>
+          <div style="margin-top:6px"><span class="btn">See all →</span></div>
+        </div>
+        <div class="box dash"><div class="t">Pending My Action <span class="n">3</span> <span class="muted">(AO/DH/CHRMO/APR only)</span></div>
+          <div class="row"><span class="grow">To certify (7.A)</span><b>4</b></div>
+          <div class="row"><span class="grow">To recommend (7.B)</span><b>2</b></div>
+          <div class="row"><span class="grow">Modification requests</span><b>1</b></div>
+          <div style="margin-top:6px"><span class="btn">Open queue →</span></div>
+        </div>
+      </div>
+      <div class="box"><div class="t">Announcements / Notifications <span class="n">4</span></div>
+        <div>• Special Emergency Leave (5 days) credited – Typhoon "X", Res. No. 2026-118</div>
+        <div>• Nov 2 declared non-working holiday – 1.0 day restored to LA-0412</div>
+        <div>• Forced Leave reminder: 3 days left to schedule before Dec 31</div>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Balance tiles are a summary of the single-pane view (03). Clicking a tile opens 03.</li>
+      <li>Shows the last 3 applications with their status. Clicking a row opens 09.</li>
+      <li>Approvers only: counts by approval tier. Hidden for a plain Employee.</li>
+      <li>System notices for crediting, holiday restoration, FL forfeiture warnings, and CTO expiry.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 01 LEAVE TYPES ================= -->
+<section class="screen" id="s01" data-nav="types" data-role="Employee">
+  <header><h2>01 · Leave Types Catalog</h2><span class="meta">Box 1.1.1 · Process 1 · Roles: EMP, AO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">Different Types of Leave</span><span class="in" style="min-width:200px">🔍 Search leave type…</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="n">1</span><span class="chip on">All (15)</span><span class="chip">Basic &amp; Mandatory</span><span class="chip">Special &amp; Family</span><span class="chip">Emergency &amp; Statutory</span><span class="chip">Commutation</span></div>
+      <div class="g3">
+        <div class="box"><div class="t">Vacation Leave (VL)</div><div class="muted">Sec. 51, Rule XVI</div><div>1.25 d/mo · file 5 days ahead</div><div class="row" style="margin-top:6px"><span class="btn">Details</span><span class="btn p">File</span></div></div>
+        <div class="box"><div class="t">Sick Leave (SL)</div><div class="muted">Sec. 43, Rule XVI</div><div>1.25 d/mo · file on return (≤5 d)</div><div class="row" style="margin-top:6px"><span class="btn">Details</span><span class="btn p">File</span></div></div>
+        <div class="box"><div class="t">Forced Leave (FL)</div><div class="muted">Sec. 25, Rule XVI</div><div>5 d/yr · deducted from VL</div><div class="row" style="margin-top:6px"><span class="btn">Details</span><span class="btn p">File</span></div></div>
+        <div class="box"><div class="t">Maternity Leave (ML)</div><div class="muted">RA 11210</div><div>105 / 120 / 60 days</div><div class="row" style="margin-top:6px"><span class="btn">Details</span><span class="btn p">File</span></div></div>
+        <div class="box"><div class="t">Paternity Leave (PL)</div><div class="muted">RA 8187</div><div>7 working days · 4 deliveries</div><div class="row" style="margin-top:6px"><span class="btn">Details</span><span class="btn p">File</span></div></div>
+        <div class="box dash"><div class="t">Special Emergency (SEL)</div><div class="muted">CSC MC 2, s. 2012</div><div>5 d / calamity · <i>only when credited</i> <span class="n">2</span></div><div class="row" style="margin-top:6px"><span class="btn">Details</span><span class="btn p">File</span></div></div>
+      </div>
+      <div class="muted">… + SPL, Solo Parent, Study, VAWC, Rehab, Magna Carta, Adoption, Monetization, TLB (same card layout)</div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Filter chips follow the 1.1.2.x groupings so the catalog and the credits view use the same categories.</li>
+      <li>"File" is disabled with a tooltip when the user has no credit or is not eligible (e.g. a male employee viewing ML, a COS/JO employee viewing VL).</li>
+      <li>"Details" opens modal 02. "File" opens 07 with Item 6.A pre-selected.</li>
+      <li>Track B (COS/JO) users see only Time Offset and an explanation that statutory leave doesn't apply to them.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 02 TYPE DETAIL MODAL ================= -->
+<section class="screen" id="s02" data-nav="types" data-role="Employee">
+  <header><h2>02 · Leave Type Details (modal)</h2><span class="meta">Box 1.1.1.1 · Process 1 · Roles: EMP, AO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="muted" style="text-align:center">[ dimmed catalog behind ]</div>
+      <div class="modal">
+        <div class="t"><span>Maternity Leave (ML)</span><span>✕</span></div>
+        <table>
+          <tr><th style="width:35%">Legal basis</th><td>RA 11210 / CSC Res. 2100020</td></tr>
+          <tr><th>Entitlement</th><td>105 days live birth · 120 solo mother · 60 miscarriage · +30 days LWOP optional</td></tr>
+          <tr><th>Filing window</th><td>≥ 30 days before, except emergency</td></tr>
+          <tr><th>Pay status</th><td>With pay · non-deductible from VL/SL</td></tr>
+          <tr><th>Earns credits?</th><td>Yes</td></tr>
+        </table>
+        <div class="box" style="margin-top:8px"><div class="t">Required attachments <span class="n">1</span></div>
+          <div>☐ Medical Certificate</div><div>☐ Proof of pregnancy</div><div>☐ CS Form 6a (if allocating up to 7 days)</div>
+        </div>
+        <div class="row"><span class="btn">⬇ Download checklist</span><span class="btn">⬇ CS Form 6a</span><span class="right btn">Close</span><span class="btn p">Proceed to File →</span></div>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>The same checklist drives the mandatory-upload validation on 07.</li>
+      <li>The three exits match Process 1: download, proceed to file (6.A pre-filled), or close.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 03 SINGLE PANE ================= -->
+<section class="screen" id="s03" data-nav="credits" data-role="AO">
+  <header><h2>03 · Actual Leave Credits (Single Pane View)</h2><span class="meta">Box 1.1.2 – 1.1.2.4 · Process 2 · Roles: EMP (self), AO (dept), CHRMO (all)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="box dash row"><span class="n">1</span><span>Employee:</span><span class="in sel grow">Dela Cruz, Juan A. — EMP-00231 · City Engineering</span><span class="btn">Search</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="big grow">Leave Credits as of Oct 20, 2026</span><span class="chip">Track A – Plantilla</span><span class="btn">⬇ Export summary</span><span class="btn">Open Ledger →</span></div>
+      <div class="box"><div class="t">1.1.2.1 Basic &amp; Mandatory</div>
+        <div class="g3">
+          <div class="box"><div>Vacation Leave</div><div class="big">14.250</div></div>
+          <div class="box"><div>Sick Leave</div><div class="big">22.500</div></div>
+          <div class="box"><div>Forced Leave <span class="n">2</span></div><div class="big">3</div><div class="muted">Used 2 · Forfeit risk 3 on Dec 31</div></div>
+        </div></div>
+      <div class="box"><div class="t">1.1.2.2 Special Privileges &amp; Family</div>
+        <div class="g4">
+          <div class="box"><div>Special Privilege</div><div class="big">2 / 3</div></div>
+          <div class="box"><div>Solo Parent</div><div class="big">— </div><div class="muted">No valid ID</div></div>
+          <div class="box"><div>Paternity</div><div class="big">7</div><div class="muted">Deliveries used 1/4</div></div>
+          <div class="box"><div>Maternity</div><div class="muted">N/A · window shows when active</div></div>
+        </div></div>
+      <div class="box"><div class="t">1.1.2.3 Special Emergency &amp; Statutory <span class="n">3</span></div>
+        <div class="g4">
+          <div class="box"><div>SEL (Calamity)</div><div class="big">5</div><div class="muted">Valid until Nov 14</div></div>
+          <div class="box"><div>VAWC</div><div class="muted">🔒 Confidential</div></div>
+          <div class="box"><div>Rehab / Magna Carta</div><div class="muted">Not active</div></div>
+          <div class="box"><div>Study Leave</div><div class="muted">Not active</div></div>
+        </div></div>
+      <div class="box"><div class="t">1.1.2.4 Compensatory Time-Off &amp; Time Offset</div>
+        <div class="g2">
+          <div class="box"><div>COC / CTO balance</div><div class="big">16 h (2.0 d)</div><div class="muted">Ceiling 120 h · next expiry 8 h on Mar 3, 2027</div></div>
+          <div class="box dash"><div>ETO (COS/JO only)</div><div class="muted">Hidden for Track A</div></div>
+        </div></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>The employee picker appears only for AO (limited to their department) and CHRMO (all employees). An Employee sees only their own record.</li>
+      <li>FL shows used, remaining, and forfeiture status. Shows a warning in Q4 if FL is unscheduled.</li>
+      <li>Statutory leaves show an "active window" (start–end) once approved and auto-credited (Process 4). VAWC is masked for everyone except the employee and CHRMO.</li>
+      <li>For Track B, every Track A group is replaced by one ETO panel.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 04 CREDITING AUTO ================= -->
+<section class="screen" id="s04" data-nav="crediting" data-role="HR Admin">
+  <header><h2>04 · Leave Crediting – Automated Runs</h2><span class="meta">Box 1.1.2.5 / 1.1.2.5.1 (Automated) · Process 3, 4 · Role: CHRMO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span class="on">Automated (System)</span><span>Manual (Calamity)</span></div>
+      <div class="g3">
+        <div class="box"><div class="t">Next monthly accrual <span class="n">1</span></div><div class="big">Oct 31 · 23:59</div><div class="muted">~1,842 eligible employees</div></div>
+        <div class="box"><div class="t">Last run</div><div class="big">Sep 30 ✓</div><div class="muted">1,839 credited · 12 LWOP-adjusted · 3 suspended</div></div>
+        <div class="box"><div class="t">Lifecycle credits (30d) <span class="n">2</span></div><div class="big">17</div><div class="muted">ML 5 · PL 8 · MCW 1 · SPL 3</div></div>
+      </div>
+      <div class="box"><div class="t">Run history</div>
+        <table><tr><th>Period</th><th>Run at</th><th>Credited</th><th>Prorated (T-II)</th><th>LWOP adj. (T-III)</th><th>Suspended</th><th></th></tr>
+        <tr><td>Sep 2026</td><td>09/30 23:59</td><td>1,839</td><td>6</td><td>12</td><td>3</td><td><span class="btn">Audit summary</span></td></tr>
+        <tr><td>Aug 2026</td><td>08/31 23:59</td><td>1,835</td><td>2</td><td>9</td><td>3</td><td><span class="btn">Audit summary</span></td></tr></table>
+      </div>
+      <div class="box"><div class="t">Sep 2026 – exceptions <span class="n">3</span></div>
+        <table><tr><th>Employee</th><th>Rule</th><th>VL</th><th>SL</th><th>Note</th></tr>
+        <tr><td>Santos, M.</td><td>Table III (5 LWOP)</td><td>1.042</td><td>1.250</td><td>SL unaffected (CGB rule)</td></tr>
+        <tr><td>Reyes, A.</td><td>Non-earning</td><td>0.000</td><td>0.000</td><td>Magna Carta RA 9710</td></tr>
+        <tr><td>Lim, C.</td><td>Table II (12 days)</td><td>0.500</td><td>0.500</td><td>Entered 09/16</td></tr></table>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>The scheduled job runs on its own and nobody clicks "run". CHRMO uses this screen to monitor and audit it.</li>
+      <li>Credits from statutory approvals (ML/PL/MCW/SPL) are posted automatically on final approval.</li>
+      <li>Exceptions list every non-standard calculation so CHRMO can spot-check it against CSC Tables II and III.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 05 CALAMITY ================= -->
+<section class="screen" id="s05" data-nav="crediting" data-role="HR Admin">
+  <header><h2>05 · Leave Crediting – Calamity Batch (SEL)</h2><span class="meta">Box 1.1.2.5.1 (Manual) · Process 5 · Role: CHRMO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span>Automated (System)</span><span class="on">Manual (Calamity)</span></div>
+      <div class="steps"><div class="done">1 Event</div><div class="cur">2 Scope</div><div>3 Preview</div><div>4 Confirm</div></div>
+      <div class="g2">
+        <div class="box"><div class="t">1 · Calamity event</div>
+          <div class="fld"><div class="lbl">Event name</div><div class="in">Typhoon "Ompong"</div></div>
+          <div class="fld"><div class="lbl">Resolution / Order No.</div><div class="in">SP Res. 2026-118</div></div>
+          <div class="g2"><div class="fld"><div class="lbl">Date of calamity</div><div class="in">10/14/2026 📅</div></div>
+          <div class="fld"><div class="lbl">Allotted days</div><div class="in">5</div></div></div>
+          <div class="fld"><div class="lbl">Declaration file</div><div class="ph" style="height:36px"><span>upload PDF</span></div></div>
+        </div>
+        <div class="box"><div class="t">2 · Target scope <span class="n">1</span></div>
+          <div>( ) All active city employees</div>
+          <div>(•) Residents of affected barangays</div>
+          <div class="in" style="margin:6px 0">☑ Ambago ☑ Libertad ☐ Doongan ☐ …</div>
+          <div class="muted">Matched by registered home address</div>
+        </div>
+      </div>
+      <div class="box"><div class="t">3 · Preview (412 employees) <span class="n">2</span></div>
+        <table><tr><th>☑</th><th>Employee</th><th>Dept</th><th>Barangay</th><th>Credit</th><th>Valid until</th></tr>
+        <tr><td>☑</td><td>Dela Cruz, J.</td><td>CEO</td><td>Ambago</td><td>5 d</td><td>11/13/2026</td></tr>
+        <tr><td>☑</td><td>Garcia, P.</td><td>CTO</td><td>Libertad</td><td>5 d</td><td>11/13/2026</td></tr>
+        <tr><td colspan="6" class="muted">… paginated</td></tr></table>
+      </div>
+      <div class="row"><span class="btn">← Back</span><span class="right btn">Save draft</span><span class="btn p">Confirm &amp; Credit 412 →</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Two scope options, matching Process 5: everyone, or a geographic filter.</li>
+      <li>CHRMO can untick individuals before confirming. The ledger notation reads "Credited per Res. No. …".</li>
+      <li>On confirm, the system broadcasts a notification to affected employees and their AOs.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 06 MY APPLICATIONS ================= -->
+<section class="screen" id="s06" data-nav="apps" data-role="Employee">
+  <header><h2>06 · My Leave Applications</h2><span class="meta">Box 1.2.1 · Roles: EMP (own), AO (dept), CHRMO (all)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">Leave Applications</span><span class="btn p">+ File Leave</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="in" style="min-width:180px">🔍 Ref / type</span><span class="in sel">Year: 2026</span><span class="in sel">Type: All</span><span class="n">1</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="chip on">All</span><span class="chip">Draft</span><span class="chip">In Review</span><span class="chip">Approved</span><span class="chip">Disapproved</span><span class="chip">Refile</span><span class="chip">Cancelled/Recalled</span></div>
+      <div class="scroll"><table>
+        <tr><th>Ref</th><th>Type</th><th>Inclusive dates</th><th>Days</th><th>Filed</th><th>Current step <span class="n">2</span></th><th>Status</th><th></th></tr>
+        <tr><td>LA-0412</td><td>VL</td><td>Nov 3–5</td><td>3</td><td>Oct 15</td><td>4/5 CHRMO</td><td>Recommended</td><td><span class="btn">View</span></td></tr>
+        <tr><td>LA-0405</td><td>SL</td><td>Oct 1–2</td><td>2</td><td>Oct 12</td><td>2/5 AO</td><td>Submitted <span class="red">⚑ LATE</span> <span class="n">3</span></td><td><span class="btn">View</span></td></tr>
+        <tr><td>LA-0398</td><td>SL</td><td>Oct 6</td><td>1</td><td>Oct 7</td><td>—</td><td>Approved</td><td><span class="btn">View</span><span class="btn">Modify</span></td></tr>
+        <tr><td>LA-0390</td><td>Monetization</td><td>—</td><td>10</td><td>Sep 30</td><td>—</td><td class="red">Disapproved</td><td><span class="btn">View</span></td></tr>
+        <tr><td>LA-0377</td><td>VL</td><td>Sep 1</td><td>1</td><td>Aug 20</td><td>—</td><td>Refile</td><td><span class="btn">Edit &amp; resubmit</span></td></tr>
+        <tr><td>—</td><td>FL</td><td>Dec 22–26</td><td>5</td><td>—</td><td>—</td><td>Draft</td><td><span class="btn">Continue</span></td></tr>
+      </table></div>
+      <div class="row" style="margin-top:6px"><span class="muted grow">Showing 1–6 of 24</span><span class="btn">‹</span><span class="btn">1</span><span class="btn">2</span><span class="btn">›</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>AO and CHRMO get extra filters for department and employee.</li>
+      <li>"Current step" shows where the application is in the 5-tier chain.</li>
+      <li>Late-filed SL shows a red flag here as well as on the form.</li>
+      <li>The row action depends on status: Draft → Continue, Refile → Edit &amp; resubmit, Approved → Modify (12).</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 07 FILE LEAVE ================= -->
+<section class="screen" id="s07" data-nav="file" data-role="Employee">
+  <header><h2>07 · File Leave Application (CS Form No. 6)</h2><span class="meta">Box 1.2.2 / 1.2.2.1 · Process 6 · Role: EMP · <i>Filled-in example of base form 07B with Sick Leave selected</i></span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="steps"><div class="cur">1 Details (6.A–6.D)</div><div>2 Attachments</div><div>3 Review &amp; Submit</div></div>
+      <div class="g2">
+        <div>
+          <div class="box"><div class="t">Items 1–5 (auto-filled) <span class="n">1</span></div>
+            <div class="g2"><div class="fld"><div class="lbl">Office/Dept</div><div class="in">City Engineering</div></div><div class="fld"><div class="lbl">Date of filing</div><div class="in">10/20/2026</div></div></div>
+            <div class="fld"><div class="lbl">Name</div><div class="in">Dela Cruz, Juan A.</div></div>
+            <div class="g2"><div class="fld"><div class="lbl">Position</div><div class="in">Engineer II</div></div><div class="fld"><div class="lbl">Salary</div><div class="in">₱ ••••• 👁</div></div></div>
+          </div>
+          <div class="box"><div class="t">6.A Type of leave</div><div class="in sel">Sick Leave</div></div>
+          <div class="box"><div class="t">6.B Details of leave <span class="n">2</span></div>
+            <div>(•) Out-patient &nbsp; ( ) In hospital</div>
+            <div class="fld"><div class="lbl">Specify illness</div><div class="in">Acute gastroenteritis</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="box"><div class="t">6.C Working days &amp; inclusive dates</div>
+            <div class="g2"><div class="fld"><div class="lbl">From</div><div class="in">10/08/2026 📅</div></div><div class="fld"><div class="lbl">To</div><div class="in">10/09/2026 📅</div></div></div>
+            <div>Working days: <b>2</b> <span class="muted">(excl. weekends &amp; holidays)</span></div>
+            <div class="wm">LATE FILING <span class="n">3</span></div>
+            <div class="red" style="font-size:11px">Filed 11 days after last leave day (limit: 5).</div>
+          </div>
+          <div class="box"><div class="t">6.D Commutation <span class="n">4</span></div>
+            <div>(•) Not Requested &nbsp; ( ) Requested</div>
+          </div>
+          <div class="box"><div class="t">Balance check <span class="n">5</span></div>
+            <table><tr><th></th><th>Balance</th><th>Applied</th><th>After</th></tr>
+            <tr><td>SL</td><td>22.500</td><td>2.000</td><td>20.500</td></tr></table>
+            <div class="warn" style="margin-top:6px;display:none">⚠ Exceeds credits – excess 1.0 d becomes LWOP</div>
+          </div>
+        </div>
+      </div>
+      <div class="row"><span class="btn">Save draft</span><span class="right btn">Cancel</span><span class="btn p">Next: Attachments →</span></div>
+      <div class="box dash" style="margin-top:8px"><div class="t">Step 2 · Attachments (preview) <span class="n">6</span></div>
+        <div class="g2"><div class="ph" style="height:50px"><span>Medical Certificate ✱ (required &gt;5 days or hospital)</span></div><div class="ph" style="height:50px"><span>Other supporting docs</span></div></div>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Items 1–5 are read-only and pulled from the HR masterfile. Salary is masked by default.</li>
+      <li>6.B changes with the leave type: destination (local/abroad) for VL, illness for SL, exam type for Study, and so on.</li>
+      <li>Rule: SL filed more than 5 days after the leave dates. The watermark can't be removed and is carried onto the printed CS Form 6 and the ledger (red font).</li>
+      <li>Locked to "Requested" for Monetization or TLB (see 08).</li>
+      <li>A live balance check runs as the user types. If credits are short, a warning says the excess will become LWOP, but submission is not blocked.</li>
+      <li>Required uploads come from the leave type's checklist (02). Submit stays disabled until they're all attached.</li>
+      <li>Submitting locks the record and routes it to the AO (Tier 2).</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 07A COMMON DATA ANALYSIS ================= -->
+<section class="screen" id="s07a">
+  <header><h2>07A · Leave Form – Common Data Inventory</h2><span class="meta">Spec card (not a screen) · Source: gathered-data §1.1.1 leave-type table + §4 CS Form 6 mapping</span></header>
+  <div class="body">
+    <div style="padding:12px;min-width:0">
+      <div class="box"><div class="t">How the common base was derived</div>
+        Every one of the 15 leave types in §1.1.1 is described with the same six attributes: <b>Leave Type · Legal Basis · Allocation/Entitlement · Filing Window · Required Attachments · Accrual/Deductibility</b>. All of them are filed on <b>CS Form 6</b> (Items 1–7). A field that every type needs, whatever its rules, belongs in the base form. Anything that only some types need goes into a <b>type-specific slot</b>.
+      </div>
+
+      <div class="box"><div class="t">A · Common fields (required for all 15 leave types)</div>
+        <div class="scroll"><table>
+          <tr><th>#</th><th>Field</th><th>CS Form 6</th><th>Source</th><th>Why it's common</th></tr>
+          <tr><td>1</td><td>Office / Department</td><td>Item 1</td><td>Auto (masterfile)</td><td>Every application is certified by the dept AO and routed by department</td></tr>
+          <tr><td>2</td><td>Name (Last, First, Middle) + Employee ID</td><td>Item 2</td><td>Auto</td><td>Identifies whose ledger is charged</td></tr>
+          <tr><td>3</td><td>Date of Filing</td><td>Item 3</td><td>Auto (today)</td><td>Every type has a <b>filing window</b>, so the filing date is checked against it (advance notice or late filing)</td></tr>
+          <tr><td>4</td><td>Position</td><td>Item 4</td><td>Auto</td><td>Sets the routing branch and appointment hierarchy (rank &amp; file, dept head, SP)</td></tr>
+          <tr><td>5</td><td>Salary</td><td>Item 5</td><td>Auto (masked)</td><td>Needed to compute days without pay, monetization and TLB</td></tr>
+          <tr><td>6</td><td>Type of Leave</td><td>6.A</td><td>Input</td><td>Picks which entitlement, filing window, attachment and deduction rules apply</td></tr>
+          <tr><td>7</td><td>Details of Leave</td><td>6.B</td><td>Input (varies by type)</td><td>Every type needs a justification. Only the shape of the field changes (see B)</td></tr>
+          <tr><td>8</td><td>No. of days applied for</td><td>6.C</td><td>Computed</td><td>Every type is measured against an <b>allocation</b> (1.25/mo, 3 d, 5 d, 7 d, 105 d, 6 mo…)</td></tr>
+          <tr><td>9</td><td>Inclusive dates (from – to)</td><td>6.C</td><td>Input</td><td>All types except Monetization/TLB, which have days but no dates</td></tr>
+          <tr><td>10</td><td>Commutation</td><td>6.D</td><td>Default / forced</td><td>Present on every form: "Not Requested" by default, forced to "Requested" for Monetization/TLB</td></tr>
+          <tr><td>11</td><td>Supporting attachments</td><td>—</td><td>Upload (checklist by type)</td><td>Every row in §1.1.1 has a "Required Documentary Attachments" entry, though some say "None"</td></tr>
+          <tr><td>12</td><td>Applicant signature / declaration</td><td>Sig. block</td><td>Input (e-sign)</td><td>Required before the application can enter routing</td></tr>
+        </table></div>
+      </div>
+
+      <div class="box"><div class="t">B · Computed by the system on every application (not typed by the user)</div>
+        <div class="scroll"><table>
+          <tr><th>Field</th><th>Derived from</th><th>Used for</th></tr>
+          <tr><td>Charged against (balance)</td><td>Accrual/Deductibility column</td><td>VL, SL, FL→VL, fixed quota (SPL/Solo/VAWC…), or non-deductible statutory window</td></tr>
+          <tr><td>Available / applied / remaining</td><td>Ledger + 6.C days</td><td>Preliminary balance check. Any excess becomes LWOP</td></tr>
+          <tr><td>Pay status (with / without pay)</td><td>Allocation + balance</td><td>Pre-fills 7.C days with pay / without pay</td></tr>
+          <tr><td>Earns credits during leave?</td><td>Accrual column</td><td>Sets the accrual-suspension flag (Rehab, Magna Carta)</td></tr>
+          <tr><td>Filing-window status</td><td>Date of filing vs window</td><td>On time, short notice, or LATE FILING (watermark + red font)</td></tr>
+          <tr><td>Eligibility check</td><td>Track, sex, civil status, service length, counters</td><td>Blocks ineligible filings (e.g. COS/JO filing VL, PL after 4 deliveries)</td></tr>
+          <tr><td>Routing chain</td><td>Branch + position</td><td>Assigns 7.A certifier, 7.B recommender, and 7.C/D approver</td></tr>
+          <tr><td>Status · Reference No. · Audit log</td><td>Workflow</td><td>Tracking through the 5 approval tiers</td></tr>
+        </table></div>
+      </div>
+
+      <div class="box"><div class="t">C · Type-specific slot (what 6.B + extra fields become per leave type)</div>
+        <div class="scroll"><table>
+          <tr><th>Leave type</th><th>Type-specific fields</th><th>Day unit</th><th>Required attachments</th></tr>
+          <tr><td>Vacation (VL)</td><td>Within PH / Abroad + destination</td><td>Working</td><td>Travel Authority (if abroad)</td></tr>
+          <tr><td>Forced (FL)</td><td>— (from annual leave schedule)</td><td>Working</td><td>Annual Leave Schedule</td></tr>
+          <tr><td>Sick (SL)</td><td>In hospital / Out-patient + illness</td><td>Working</td><td>Med Cert if &gt;5 days or hospital/out-patient</td></tr>
+          <tr><td>Maternity (ML)</td><td>Classification (live birth / solo / miscarriage), expected delivery, +30d LWOP option, allocate ≤7 d to</td><td><b>Calendar</b></td><td>Med Cert, proof of pregnancy, CS Form 6a</td></tr>
+          <tr><td>Paternity (PL)</td><td>Spouse name, child's date of birth, delivery no. (≤4)</td><td>Working</td><td>Marriage Contract, Birth Cert</td></tr>
+          <tr><td>Special Privilege</td><td>Reason category (milestone, mourning, graduation, hospital, emergency)</td><td>Working</td><td>Event proof</td></tr>
+          <tr><td>Solo Parent</td><td>Solo Parent ID no. + validity</td><td>Working</td><td>Solo Parent ID</td></tr>
+          <tr><td>Study</td><td>Master's completion / BAR / Board review, contract ref.</td><td>Months</td><td>Contract, school cert, Mayor approval</td></tr>
+          <tr><td>VAWC</td><td>Protection order type (BPO/TPO/PPO) · <i>confidential</i></td><td>Working</td><td>Protection Order / police / barangay cert</td></tr>
+          <tr><td>Rehabilitation</td><td>Date of injury, incident description</td><td>Months</td><td>Incident report, Med Cert, AO/DH recommendation</td></tr>
+          <tr><td>Magna Carta (women)</td><td>Gynecological surgery / illness, surgery date</td><td>Months</td><td>Med Cert, clinical summary, operative &amp; histopath reports</td></tr>
+          <tr><td>Calamity (SEL)</td><td>Calamity event (pick from credited events)</td><td>Working</td><td>Calamity declaration / proof of residence</td></tr>
+          <tr><td>Adoption</td><td>Child's age, placement date, PAPA ref.</td><td>Calendar</td><td>DSWD PAPA</td></tr>
+          <tr><td>Monetization</td><td>VL days, SL days, purpose (no dates)</td><td>Days</td><td>Letter of request; proof if &gt;50%</td></tr>
+          <tr><td>Terminal Leave (TLB)</td><td>Separation type + date (no dates of leave)</td><td>Days</td><td>Clearances, Service Record, separation order</td></tr>
+        </table></div>
+      </div>
+    </div>
+    <aside class="notes"><h4>Conclusion</h4><ol>
+      <li><b>12 common fields</b> make up the base form. Five are auto-filled, one is a default, and only four need typing: type, details, dates, and attachments. The signature is the fifth input.</li>
+      <li>The <b>six columns</b> of the §1.1.1 table act as the per-type <b>rule profile</b>. The form reads the profile; it doesn't hard-code rules for each type.</li>
+      <li>The day unit varies (working, calendar, months, days with no dates). The base form keeps one "No. of days" field and shows the unit beside it.</li>
+      <li>Everything in table C goes into one dynamic slot (07B, section D). Adding a new leave type means adding a profile and slot fields, without redesigning the form.</li>
+      <li><b>These attributes are the schema for the Leave Type Builder (25).</b> CHRMO can add a future type, such as a Wellness Leave, by filling them in, with no code change.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 07B BASE FORM ================= -->
+<section class="screen" id="s07b" data-nav="file" data-role="Employee">
+  <header><h2>07B · Leave Application Form – Common Base</h2><span class="meta">Box 1.2.2.1 · Built from 07A · Roles: EMP (file), all approvers (read)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">Application for Leave</span><span class="muted">Ref: LA-____ · Status: Draft</span></div>
+
+      <div class="box"><div class="t">A · Applicant (Items 1–5) – auto-filled, read-only <span class="n">1</span></div>
+        <div class="g4">
+          <div class="fld"><div class="lbl">1 Office / Department</div><div class="in">[auto]</div></div>
+          <div class="fld"><div class="lbl">2 Name (Last, First, M.I.)</div><div class="in">[auto]</div></div>
+          <div class="fld"><div class="lbl">Employee ID</div><div class="in">[auto]</div></div>
+          <div class="fld"><div class="lbl">3 Date of filing</div><div class="in">[today]</div></div>
+          <div class="fld"><div class="lbl">4 Position</div><div class="in">[auto]</div></div>
+          <div class="fld"><div class="lbl">5 Salary</div><div class="in">₱ ••••• 👁</div></div>
+          <div class="fld"><div class="lbl">Appointment / Track</div><div class="in">[auto] Permanent · A</div></div>
+          <div class="fld"><div class="lbl">Branch (for routing)</div><div class="in">[auto] Executive</div></div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="box"><div class="t">B · 6.A Type of leave ✱ <span class="n">2</span></div>
+          <div class="in sel">— Select leave type —</div>
+          <div class="box dash" style="margin-top:6px"><div class="t">Rule profile (from the leave-type catalog)</div>
+            <table>
+              <tr><th>Legal basis</th><td>[ … ]</td></tr>
+              <tr><th>Entitlement</th><td>[ … ]</td></tr>
+              <tr><th>Filing window</th><td>[ … ]</td></tr>
+              <tr><th>Charged against</th><td>[ VL / SL / quota / none ]</td></tr>
+              <tr><th>Earns credits?</th><td>[ yes / no ]</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="box"><div class="t">C · 6.C Period ✱ <span class="n">3</span></div>
+          <div class="g2">
+            <div class="fld"><div class="lbl">From</div><div class="in">📅</div></div>
+            <div class="fld"><div class="lbl">To</div><div class="in">📅</div></div>
+          </div>
+          <div class="fld"><div class="lbl">No. of days applied for</div><div class="row"><span class="in">[computed]</span><span class="chip">unit: working days</span></div></div>
+          <div class="muted" style="font-size:11px">Excludes weekends &amp; declared holidays (working-day types)</div>
+          <div class="wm" style="opacity:.5">[ LATE FILING watermark area ]</div>
+        </div>
+      </div>
+
+      <div class="box dash"><div class="t">D · 6.B Details of leave – type-specific slot <span class="n">4</span></div>
+        <div class="fld"><div class="lbl">Reason / details ✱ (always shown)</div><div class="in ta">…</div></div>
+        <div class="g3">
+          <div class="ph" style="height:56px"><span>slot field 1 (e.g. destination / illness)</span></div>
+          <div class="ph" style="height:56px"><span>slot field 2 (e.g. ID no. / event)</span></div>
+          <div class="ph" style="height:56px"><span>slot field 3 (optional)</span></div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="box"><div class="t">E · 6.D Commutation <span class="n">5</span></div>
+          <div>(•) Not Requested &nbsp; ( ) Requested</div>
+        </div>
+        <div class="box"><div class="t">F · Attachments <span class="n">6</span></div>
+          <div>☐ [required doc 1 from profile] <span class="btn">Upload</span></div>
+          <div>☐ [required doc 2 from profile] <span class="btn">Upload</span></div>
+          <div class="muted">+ Other supporting documents (optional)</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="box"><div class="t">G · Credit check (computed) <span class="n">7</span></div>
+          <table><tr><th>Charged to</th><th>Available</th><th>Applied</th><th>Remaining</th><th>w/o pay</th></tr>
+          <tr><td>[ … ]</td><td>[ … ]</td><td>[ … ]</td><td>[ … ]</td><td>[ … ]</td></tr></table>
+        </div>
+        <div class="box"><div class="t">H · Compliance flags (computed) <span class="n">8</span></div>
+          <div>☐ Eligible for this leave type</div>
+          <div>☐ Within filing window</div>
+          <div>☐ Required attachments complete</div>
+          <div>☐ No overlap with other leave / holidays</div>
+        </div>
+      </div>
+
+      <div class="box"><div class="t">I · Declaration &amp; signature ✱</div>
+        <div>☐ I certify that the information above is true and correct.</div>
+        <div class="row" style="margin-top:6px"><div class="ph" style="width:200px;height:36px"><span>applicant e-signature</span></div></div>
+      </div>
+
+      <div class="box dash"><div class="t">Section 7 · Details of action (approvers only, read-only to applicant) <span class="n">9</span></div>
+        <div class="g4"><div class="ph" style="height:30px"><span>7.A AO</span></div><div class="ph" style="height:30px"><span>7.B DH</span></div><div class="ph" style="height:30px"><span>7.C approved for</span></div><div class="ph" style="height:30px"><span>7.D disapproved</span></div></div>
+      </div>
+
+      <div class="row"><span class="btn">Save draft</span><span class="right btn">Cancel</span><span class="btn p">Submit</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Items 1–5 are always auto-filled from the HR masterfile. Track and branch are hidden on the printout but decide eligibility and routing.</li>
+      <li>Choosing the type loads the rule profile (the six §1.1.1 columns), and every section below reacts to it.</li>
+      <li>Dates are hidden for Monetization/TLB, where only the day count shows. The unit label switches to calendar days for ML and Adoption, and to months for Study, Rehab and Magna Carta.</li>
+      <li>The only area that changes per type: one reason box that is always shown, plus 0–3 fields from table C in 07A.</li>
+      <li>Defaults to "Not Requested" and is locked to "Requested" for Monetization/TLB.</li>
+      <li>The checklist comes from the profile. Submit is disabled until every required item is uploaded.</li>
+      <li>A shortfall doesn't block submission. It shows a warning that the excess becomes LWOP.</li>
+      <li>All four flags must pass, except a late filing, which is allowed but watermarked.</li>
+      <li>Section 7 is part of the same record, so the application and approval stay together as one CS Form 6.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 08 MONETIZATION ================= -->
+<section class="screen" id="s08" data-nav="file" data-role="Employee">
+  <header><h2>08 · Monetization / Terminal Leave variant</h2><span class="meta">Box 1.2.2 · Process 8, 9 · Roles: EMP, CHRMO (TLB audit)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span class="on">Monetization</span><span>Terminal Leave Benefit</span></div>
+      <div class="g2">
+        <div class="box"><div class="t">Request</div>
+          <div class="fld"><div class="lbl">6.D Commutation</div><div class="in">Requested 🔒</div></div>
+          <div class="g2"><div class="fld"><div class="lbl">VL days to monetize</div><div class="in">10</div></div><div class="fld"><div class="lbl">SL days to monetize</div><div class="in">0 🔒</div></div></div>
+          <div class="fld"><div class="lbl">Reason / letter of request</div><div class="in ta">…</div></div>
+        </div>
+        <div class="box"><div class="t">Rule checks <span class="n">1</span></div>
+          <div>✔ Minimum 10 days</div>
+          <div>✔ VL after request ≥ 5.000 (14.25 → 4.25 ✖)</div>
+          <div class="red">✖ Must retain 5.000 VL – reduce to ≤ 9.25 days</div>
+          <div>— SL monetization locked: VL not exhausted <span class="n">2</span></div>
+          <div>— &gt;50% of credits? No (justification not required)</div>
+        </div>
+      </div>
+      <div class="box dash"><div class="t">TLB tab (preview) <span class="n">3</span></div>
+        <div class="g3">
+          <div class="box"><div>Final VL</div><div class="big">142.375</div></div>
+          <div class="box"><div>Final SL</div><div class="big">201.125</div></div>
+          <div class="box"><div>Est. TLB</div><div class="big">343.500 d × daily rate</div></div>
+        </div>
+        <div>Clearances: ☐ Property &amp; Money ☐ Service Record ☐ Ombudsman ☐ Retirement Order / Acceptance</div>
+      </div>
+      <div class="row"><span class="right btn">Cancel</span><span class="btn p" style="opacity:.4">Submit (blocked)</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>The Process 8 guards run live: minimum 10 days, keep at least 5 VL, SL only after VL is exhausted, and proof required above 50%.</li>
+      <li>The SL field unlocks only when VL = 0. It then requires a written justification and is routed for direct Mayor approval.</li>
+      <li>TLB is opened from the separation trigger. CHRMO's ledger audit fills in the final balances, and on approval the ledger is closed and zeroed.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 09 DETAILS ================= -->
+<section class="screen" id="s09" data-nav="apps" data-role="Employee">
+  <header><h2>09 · View Leave Application Details</h2><span class="meta">Box 1.2.1.1 · Roles: EMP, AO, DH, CHRMO, APR</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">LA-0412 · Vacation Leave · Nov 3–5 (3 d)</span><span class="chip on">Recommended</span><span class="btn">⬇ CS Form 6 PDF</span><span class="btn">Request change</span></div>
+      <div class="box"><div class="t">Approval progress <span class="n">1</span></div>
+        <div class="steps"><div class="done">1 Submitted<br>Oct 15</div><div class="done">2 AO Certified<br>Oct 16</div><div class="done">3 DH Recommended<br>Oct 17</div><div class="cur">4 CHRMO Audit<br>pending</div><div>5 Mayor<br>—</div></div>
+      </div>
+      <div class="g2">
+        <div class="box"><div class="t">Section 6 – Details</div>
+          <table><tr><th>6.A</th><td>Vacation Leave</td></tr><tr><th>6.B</th><td>Within the Philippines – Cebu City</td></tr><tr><th>6.C</th><td>3 working days · 11/03–11/05/2026</td></tr><tr><th>6.D</th><td>Not Requested</td></tr></table>
+          <div class="t" style="margin-top:8px">Attachments</div><div class="row"><div class="ph" style="width:80px;height:50px"><span>file</span></div><span class="muted">none required</span></div>
+        </div>
+        <div class="box"><div class="t">Section 7 – Action <span class="n">2</span></div>
+          <table><tr><th>7.A</th><td>VL 14.250 · SL 22.500 — certified by M. Tan (AO) ✍</td></tr>
+          <tr><th>7.B</th><td>For approval — Engr. R. Uy (DH) ✍</td></tr>
+          <tr><th>7.C</th><td class="muted">—</td></tr><tr><th>7.D</th><td class="muted">—</td></tr></table>
+        </div>
+      </div>
+      <div class="box"><div class="t">Audit log <span class="n">3</span></div>
+        <table><tr><th>When</th><th>Who</th><th>Action</th><th>Remarks</th></tr>
+        <tr><td>10/17 09:12</td><td>R. Uy (DH)</td><td>Recommended</td><td>—</td></tr>
+        <tr><td>10/16 14:03</td><td>M. Tan (AO)</td><td>Certified 7.A</td><td>—</td></tr>
+        <tr><td>10/15 08:40</td><td>J. Dela Cruz</td><td>Submitted</td><td>—</td></tr></table>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>The stepper reflects the routing matrix for the applicant's branch. For example, Legislative staff see "Vice Mayor" at step 5.</li>
+      <li>A DH disapproval in 7.B is shown in red. An OIC signature shows as "For: [Official], [Title] by [OIC], [Order No.]".</li>
+      <li>Read-only and immutable. Includes holiday restorations and modifications.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 10 QUEUE ================= -->
+<section class="screen" id="s10" data-nav="queue" data-role="Dept Head">
+  <header><h2>10 · Approval Queue</h2><span class="meta">Box 1.2.2.2 · Process 7 · Roles: AO, DH, CHRMO, APR (incl. OIC)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">My Approval Queue</span><span class="in sel">Acting as: Dept Head – City Engineering</span><span class="n">1</span></div>
+      <div class="tabs"><span class="on">Leave applications (6)</span><span>Modification requests (1)</span><span>CTO / Offset (2)</span><span>Done</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="in">🔍 Employee / ref</span><span class="in sel">Type: All</span><span class="chip">⚑ Late filing</span><span class="chip">Oldest first</span></div>
+      <div class="scroll"><table>
+        <tr><th>☐</th><th>Ref</th><th>Employee</th><th>Type</th><th>Dates</th><th>Days</th><th>Waiting</th><th>Flags</th><th></th></tr>
+        <tr><td>☐</td><td>LA-0415</td><td>Santos, M.</td><td>VL</td><td>Nov 10–14</td><td>5</td><td>2 d</td><td>—</td><td><span class="btn p">Review</span></td></tr>
+        <tr><td>☐</td><td>LA-0405</td><td>Dela Cruz, J.</td><td>SL</td><td>Oct 8–9</td><td>2</td><td>1 d</td><td class="red">LATE</td><td><span class="btn p">Review</span></td></tr>
+        <tr><td>☐</td><td>LA-0409</td><td>Garcia, P.</td><td>VL</td><td>Oct 27–31</td><td>5</td><td>4 d</td><td>Exceeds bal. → LWOP</td><td><span class="btn p">Review</span></td></tr>
+      </table></div>
+      <div class="row" style="margin-top:6px"><span class="muted grow">Bulk actions are disabled for recommendations <span class="n">2</span></span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Users with more than one role, or an active OIC delegation, switch context here. An OIC sees the principal's queue with an "OIC" badge.</li>
+      <li>Every application needs an individual decision at each tier, so there are no bulk approvals.</li>
+      <li>The columns adapt to the tier. The AO queue adds a balance column, and the CHRMO queue adds a documents-complete column.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 11 REVIEW & ACT ================= -->
+<section class="screen" id="s11" data-nav="queue" data-role="Dept Head">
+  <header><h2>11 · Review &amp; Act on Application (Items 7.A – 7.D)</h2><span class="meta">Box 1.2.2.2 · Process 7 · Roles: AO, DH, CHRMO, APR</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="g2">
+        <div class="box"><div class="t">Application (read-only)</div>
+          <div class="ph" style="height:220px"><span>CS Form 6 preview · sections 1–6</span></div>
+          <div class="row" style="margin-top:6px"><span class="btn">Attachments (1)</span><span class="btn">Ledger snapshot</span><span class="btn">Audit log</span></div>
+        </div>
+        <div>
+          <div class="box dash"><div class="t">Tier 2 · AO – 7.A Certification <span class="n">1</span></div>
+            <div>As of 10/20/2026: VL <b>14.250</b> · SL <b>22.500</b> (auto)</div><div class="row"><span class="btn">Certify &amp; forward</span><span class="btn">Return</span></div></div>
+          <div class="box" style="border-width:2px"><div class="t">Tier 3 · DH – 7.B Recommendation <span class="n">2</span></div>
+            <div>(•) For approval</div><div>( ) For disapproval due to: <span class="red">[ reason – shown in RED ]</span></div>
+            <div class="in ta" style="margin:6px 0">Remarks…</div>
+            <div class="row"><span class="btn">Return to employee</span><span class="right btn p">Sign &amp; forward to CHRMO</span></div></div>
+          <div class="box dash"><div class="t">Tier 4 · CHRMO – Compliance audit <span class="n">3</span></div>
+            <div>☐ Statutory rules OK ☐ Documents authentic ☐ Routing chain correct</div></div>
+          <div class="box dash"><div class="t">Tier 5 · Approving Authority – 7.C / 7.D <span class="n">4</span></div>
+            <div class="g2"><div class="fld"><div class="lbl">Days with pay</div><div class="in">3</div></div><div class="fld"><div class="lbl">Days without pay</div><div class="in">0</div></div></div>
+            <div class="row"><span class="btn p">Approve</span><span class="btn">Disapprove (7.D reason)</span><span class="btn">Refile</span></div></div>
+        </div>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Only the panel for the current user's tier is active. The others are collapsed and read-only. 7.A balances come from the ledger and can't be typed in.</li>
+      <li>Choosing disapproval switches the recommendation text to red on screen and on the PDF, and requires a reason.</li>
+      <li>CHRMO can't forward until all checks are ticked.</li>
+      <li>There are three outcomes: Approved (credits deducted or allocated), Disapproved (7.D reason), and Refile (returned to employee). An OIC signature shows the "For: … by …" line.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 12 MODIFY ================= -->
+<section class="screen" id="s12" data-nav="modify" data-role="Employee">
+  <header><h2>12 · Modify Approved Leave (Cancel / Reschedule)</h2><span class="meta">Box 1.2.3 / 1.2.3.1 · Process 11 · Roles: EMP request → DH approve</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="box"><div class="t">LA-0398 · Sick Leave · Oct 6 (1 d) · Approved</div></div>
+      <div class="tabs"><span class="on">Cancel</span><span>Reschedule</span></div>
+      <div class="g2">
+        <div class="box"><div class="t">Cancellation <span class="n">1</span></div>
+          <div class="fld"><div class="lbl">Dates to cancel</div><div>☑ Oct 6</div></div>
+          <div class="fld"><div class="lbl">Justification</div><div class="in ta">Reported for duty…</div></div>
+          <div>Credits to restore: <b>1.000 SL</b></div>
+        </div>
+        <div class="box dash"><div class="t">Reschedule (other tab) <span class="n">2</span></div>
+          <div class="g2"><div class="fld"><div class="lbl">New from</div><div class="in">📅</div></div><div class="fld"><div class="lbl">New to</div><div class="in">📅</div></div></div>
+          <div class="warn">⚠ Conflict: Nov 4 overlaps LA-0412</div>
+        </div>
+      </div>
+      <div class="row"><span class="right btn">Back</span><span class="btn p">Send to Dept Head</span></div>
+      <div class="box" style="margin-top:8px"><div class="t">Modification history</div>
+        <table><tr><th>Req</th><th>Type</th><th>Status</th><th>Decided by</th></tr><tr><td>MR-022</td><td>Reschedule</td><td>Approved</td><td>R. Uy (DH)</td></tr></table></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Approved by the DH alone. On approval the status becomes CANCELLED, credits are restored, and the employee, AO and CHRMO are notified.</li>
+      <li>The overlap and working-calendar check runs before routing. The balance stays as it is, and only the dates change.</li>
+      <li>Holiday collisions are handled by the system, not requested here. See 21.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 13 RECALL ================= -->
+<section class="screen" id="s13" data-nav="modify" data-role="Dept Head">
+  <header><h2>13 · Recall Request (VL / FL only)</h2><span class="meta">Box 1.2.3.1 · Process 10 · Roles: DH initiates → Mayor approves → CHRMO memo</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="box"><div class="t">Select approved leave to recall <span class="n">1</span></div>
+        <table><tr><th></th><th>Employee</th><th>Type</th><th>Dates</th><th>Recallable?</th></tr>
+        <tr><td>(•)</td><td>Santos, M.</td><td>VL</td><td>Oct 20–24</td><td>Yes</td></tr>
+        <tr><td>( )</td><td>Garcia, P.</td><td>FL</td><td>Oct 21–23</td><td>Yes</td></tr>
+        <tr><td class="muted">—</td><td class="muted">Reyes, A.</td><td class="muted">ML</td><td class="muted">Sep–Dec</td><td class="muted">No (ML not recallable)</td></tr></table>
+      </div>
+      <div class="g2">
+        <div class="box"><div class="t">Recall details</div>
+          <div class="fld"><div class="lbl">Recalled dates</div><div>☐ Oct 20 ☐ Oct 21 ☑ Oct 22 ☑ Oct 23 ☑ Oct 24</div></div>
+          <div class="fld"><div class="lbl">Operational justification</div><div class="in ta">Bridge inspection – typhoon damage…</div></div>
+        </div>
+        <div class="box"><div class="t">Outcome preview <span class="n">2</span></div>
+          <div>Credits restored on approval: <b>3.000 VL</b></div>
+          <div>Ledger note: "Recalled per Memo No. ____"</div>
+          <div class="ph" style="height:60px;margin-top:6px"><span>Admin Recall Memo (auto-generated)</span></div>
+        </div>
+      </div>
+      <div class="row"><span class="right btn">Cancel</span><span class="btn p">Submit to City Mayor</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Only VL and FL rows can be selected. Other types are greyed out with the reason shown.</li>
+      <li>After Mayor approval the memo is numbered and served, and credits are restored. Recalled FL is protected from year-end forfeiture.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 14 CREDITS MGMT ================= -->
+<section class="screen" id="s14" data-nav="cm" data-role="HR Admin">
+  <header><h2>14 · Employee Leave Credits Management</h2><span class="meta">Box 1.3.1 · Process 13 · Role: CHRMO (CRUD)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span class="on">Opening balances</span><span>FL forfeiture (year-end)</span><span>Adjustments</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="in grow">🔍 Employee</span><span class="in sel">Dept: All</span><span class="btn">⬇ Template</span><span class="btn">⬆ Import CSV</span><span class="n">1</span></div>
+      <div class="scroll"><table>
+        <tr><th>Employee</th><th>Track</th><th>VL</th><th>SL</th><th>FL left</th><th>SPL left</th><th>CTO h</th><th>As of</th><th></th></tr>
+        <tr><td>Dela Cruz, J.</td><td>A</td><td>14.250</td><td>22.500</td><td>3</td><td>2</td><td>16</td><td>10/20</td><td><span class="btn">Adjust</span></td></tr>
+        <tr><td>Bautista, R.</td><td>B</td><td>—</td><td>—</td><td>—</td><td>—</td><td>ETO 6</td><td>10/20</td><td><span class="btn">Adjust</span></td></tr>
+      </table></div>
+      <div class="modal"><div class="t"><span>Adjust credits – Dela Cruz, J.</span><span>✕</span></div>
+        <div class="g3"><div class="fld"><div class="lbl">Credit type</div><div class="in sel">VL</div></div><div class="fld"><div class="lbl">+/- Days</div><div class="in">+0.500</div></div><div class="fld"><div class="lbl">Effective</div><div class="in">10/20/2026</div></div></div>
+        <div class="fld"><div class="lbl">Reason ✱</div><div class="in ta">Correction – DTR rectification approved</div></div>
+        <div class="fld"><div class="lbl">Supporting memo / office order ✱ <span class="n">2</span></div><div class="ph" style="height:36px"><span>upload</span></div></div>
+        <div class="row"><span class="right btn">Cancel</span><span class="btn p">Post adjustment</span></div>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Bulk onboarding of starting balances when migrating from the paper ledger cards.</li>
+      <li>A reason and an attachment are mandatory. Each adjustment writes an immutable audit entry and appears as a line in the ledger (15).</li>
+      <li>The FL forfeiture tab lists unused FL as of Dec 31 for CHRMO to confirm, excluding FL protected by a recall.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 15 LEDGER ================= -->
+<section class="screen" id="s15" data-nav="ledger" data-role="HR Admin">
+  <header><h2>15 · Employee Leave Ledger Card</h2><span class="meta">Box 1.3.2 · Process 13 · EMP view · AO view (dept) · CHRMO CRUD</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="in sel grow">Dela Cruz, Juan A. — EMP-00231</span><span class="in sel">2026</span><span class="btn">⬇ Excel (ledger template)</span><span class="btn">🖨 Print</span></div>
+      <div class="box"><div class="g4"><div>Name: Dela Cruz, J.A.</div><div>Position: Engineer II</div><div>1st day of service: 03/01/2015</div><div>Status: Permanent</div></div></div>
+      <div class="scroll"><table>
+        <tr><th rowspan="2">Period</th><th rowspan="2">Particulars</th><th colspan="4">Vacation Leave</th><th colspan="4">Sick Leave</th><th rowspan="2">Remarks</th></tr>
+        <tr><th>Earned</th><th>Abs/UT w/ pay</th><th>Bal</th><th>w/o pay</th><th>Earned</th><th>Abs w/ pay</th><th>Bal</th><th>w/o pay</th></tr>
+        <tr><td>Aug 2026</td><td>Monthly accrual</td><td>1.250</td><td></td><td>13.875</td><td></td><td>1.250</td><td></td><td>21.250</td><td></td><td></td></tr>
+        <tr class="red"><td>Aug 2026</td><td>Tardiness 1h 25m <span class="n">1</span></td><td></td><td>0.177</td><td>13.698</td><td></td><td></td><td></td><td>21.250</td><td></td><td>T-IV</td></tr>
+        <tr><td>Sep 2026</td><td>Monthly accrual</td><td>1.250</td><td></td><td>14.948</td><td></td><td>1.250</td><td></td><td>22.500</td><td></td><td></td></tr>
+        <tr><td>Sep 2026</td><td>VL 09/01 (LA-0377)</td><td></td><td>1.000</td><td>13.948</td><td></td><td></td><td></td><td>22.500</td><td></td><td></td></tr>
+        <tr class="red"><td>Oct 2026</td><td>SL 10/08–09 LATE FILING</td><td></td><td></td><td>13.948</td><td></td><td></td><td>2.000</td><td>20.500</td><td></td><td>Late</td></tr>
+        <tr><td>Oct 2026</td><td>Restored – Holiday 11/02 <span class="n">2</span></td><td>1.000</td><td></td><td>14.948</td><td></td><td></td><td></td><td>20.500</td><td></td><td>Auto</td></tr>
+      </table></div>
+      <div class="row dash box" style="margin-top:8px"><span class="n">3</span><span class="grow">CHRMO tools:</span><span class="btn">+ Manual entry</span><span class="btn">Override line</span><span class="btn">View audit trail</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Tardiness, undertime, late filing and LWOP rows are shown in red. Tardiness is charged to VL only, using (h × 0.125) + (m × 0.002083). Any excess beyond VL becomes LWOP.</li>
+      <li>System-posted lines (accrual, holiday restoration, recall, calamity) are labelled with their source.</li>
+      <li>Shown only to CHRMO. An override requires a memo upload and leaves the original line struck through, with nothing deleted. EMP and AO get a read-only view.</li>
+      <li>An LWOP post triggers the NOSI check and Service Record sync (see 23).</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 16 COC/CTO ================= -->
+<section class="screen" id="s16" data-nav="coc" data-role="HR Admin">
+  <header><h2>16 · COC / CTO Ledger (Track A)</h2><span class="meta">Box 1.3.3 · Process 14 · EMP view · AO view · CHRMO CRUD</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span class="on">COC / CTO (Plantilla/Casual)</span><span>ETO (COS/JO) → 17</span></div>
+      <div class="g3">
+        <div class="box"><div>Balance</div><div class="big">16 h</div></div>
+        <div class="box"><div>Ceiling <span class="n">1</span></div><div class="big">16 / 120 h</div></div>
+        <div class="box"><div>Expiring ≤ 90 d</div><div class="big">8 h</div><div class="muted">03/03/2027</div></div>
+      </div>
+      <div class="box"><div class="t">Earning batches (FIFO) <span class="n">2</span></div>
+        <table><tr><th>Earned</th><th>Ref</th><th>OT hrs</th><th>Day type</th><th>×</th><th>COC</th><th>Used</th><th>Left</th><th>Expires</th></tr>
+        <tr><td>03/03/26</td><td>COC-101</td><td>8</td><td>Regular</td><td>1.0</td><td>8</td><td>0</td><td>8</td><td>03/03/27</td></tr>
+        <tr><td>06/14/26</td><td>COC-130</td><td>8</td><td>Weekend</td><td>1.5</td><td>12</td><td>4</td><td>8</td><td>06/14/27</td></tr></table></div>
+      <div class="row"><span class="btn">+ Record COC (CHRMO)</span><span class="right btn p">File CTO</span><span class="n">3</span></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Credits above the 120-hour ceiling are capped when posted, and a message says so.</li>
+      <li>CTO deducts from the oldest batch first. Batches still unused after one year are forfeited automatically.</li>
+      <li>A CTO application is limited to 5 consecutive days and goes through DH → Mayor approval.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 17 ETO ================= -->
+<section class="screen" id="s17" data-nav="coc" data-role="Employee">
+  <header><h2>17 · Overtime &amp; Time Offset (Track B – COS/JO)</h2><span class="meta">Box 1.1.2.4, 1.3.3 · Process 15 · Roles: COS/JO, Supervisor, DH, CHRMO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span>COC / CTO</span><span class="on">ETO (COS/JO)</span></div>
+      <div class="g2">
+        <div class="box"><div class="t">ETO balance</div><div class="big">6.0 h</div>
+          <div class="row" style="margin-top:6px"><span class="btn">+ Overtime Request</span><span class="btn p">+ Time Offset</span></div></div>
+        <div class="box"><div class="t">Time Offset application <span class="n">1</span></div>
+          <div class="g2"><div class="fld"><div class="lbl">Date</div><div class="in">10/22/2026</div></div><div class="fld"><div class="lbl">Hours</div><div class="in">4</div></div></div>
+          <div class="fld"><div class="lbl">Reason</div><div class="in">Personal errand (PM)</div></div>
+          <div class="muted">Balance after: 2.0 h ✓</div></div>
+      </div>
+      <div class="box"><div class="t">Earned Time-Off Ledger <span class="n">2</span></div>
+        <table><tr><th>Date</th><th>Ref</th><th>Particulars</th><th>Earned</th><th>Offset</th><th>Bal</th></tr>
+        <tr><td>09/28</td><td>CETO-044</td><td>Flood ops OT (project X)</td><td>8.0</td><td></td><td>8.0</td></tr>
+        <tr><td>10/05</td><td>TO-017</td><td>Offset – undertime</td><td></td><td>2.0</td><td>6.0</td></tr></table></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>If the ETO balance isn't enough, the form warns that the absence will be deducted from wages pro-rata.</li>
+      <li>Earnings are posted only after CHRMO issues a CETO for the approved Overtime Request.</li>
+      <li>COS/JO users never see VL/SL screens. Their nav is limited to Types → ETO, Applications, and Reports (CETO).</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 18 REPORTS ================= -->
+<section class="screen" id="s18" data-nav="rpt" data-role="AO">
+  <header><h2>18 · Regulatory Compliance Reports (MRATU / SRATU)</h2><span class="meta">Box 1.4.1 · Process 16 · Roles: AO prepare · DH certify · CHRMO receive/sync</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="in sel">Report: MRATU</span><span class="in sel">Month: Sep 2026</span><span class="in sel">Dept: City Engineering</span><span class="btn p">Generate</span></div>
+      <div class="tabs"><span class="on">Regular MRATU</span><span>Casual MRATU</span><span>SRATU summary</span></div>
+      <div class="scroll"><table>
+        <tr><th>Employee</th><th>Absences</th><th>Tardy (x / min)</th><th>UT (x / min)</th><th>LWOP d</th><th>Remarks</th></tr>
+        <tr><td>Dela Cruz, J.</td><td>0</td><td class="red">3 / 85</td><td>0</td><td>0</td><td></td></tr>
+        <tr><td>Santos, M.</td><td>5</td><td>0</td><td class="red">1 / 30</td><td class="red">5</td><td></td></tr>
+      </table></div>
+      <div class="box" style="margin-top:8px"><div class="t">Workflow <span class="n">1</span></div>
+        <div class="steps"><div class="done">Generated (AO)</div><div class="cur">Certify (DH)</div><div>Transmitted to CHRMO</div><div>Synced to payroll</div></div>
+        <div class="row"><span class="btn">⬇ XLSX</span><span class="btn">⬇ SRATU DOCX</span><span class="right btn p">Certify &amp; transmit</span></div></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Reports move through generate → certify → transmit → payroll sync. They lock after transmittal, and changes require CHRMO to re-open them.</li>
+      <li>MRATU is always exported as two sheets, Regular and Casual.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 19 CERTS ================= -->
+<section class="screen" id="s19" data-nav="cert" data-role="Employee">
+  <header><h2>19 · Official Certifications</h2><span class="meta">Box 1.4.2 · Process 17 · Roles: EMP request · CHRMO / DH sign</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="g2">
+        <div class="box"><div class="t">Request a certificate</div>
+          <div class="fld"><div class="lbl">Type <span class="n">1</span></div><div class="in sel">Certificate of Earned Leave Credits</div></div>
+          <div class="fld"><div class="lbl">Purpose</div><div class="in sel">Transfer / Clearance / Monetization</div></div>
+          <div class="fld"><div class="lbl">Notes</div><div class="in ta"></div></div>
+          <div class="row"><span class="right btn p">Submit request</span></div></div>
+        <div class="box"><div class="t">Preview</div><div class="ph" style="height:180px"><span>certificate template · VL/SL balances · signatory</span></div></div>
+      </div>
+      <div class="box"><div class="t">My requests</div>
+        <table><tr><th>Ref</th><th>Type</th><th>Requested</th><th>Status</th><th></th></tr>
+        <tr><td>CR-009</td><td>Earned Leave</td><td>10/01</td><td>Released</td><td><span class="btn">⬇ PDF</span></td></tr>
+        <tr><td>CR-012</td><td>Earned Leave</td><td>10/19</td><td>For CHRMO signature</td><td>—</td></tr></table></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Track A gets the Earned Leave Credits certificate, signed by the CHRMO Head. Track B gets the CETO, certified by the DH and the CHRMO Head. The dropdown only offers the one that applies.</li>
+      <li>Balances are fetched live when the certificate is generated. A released PDF is stamped and can't be edited.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 20 SCHEDULE / DTR ================= -->
+<section class="screen" id="s20" data-nav="sched" data-role="AO">
+  <header><h2>20 · Work Schedule Master &amp; DTR Rectification</h2><span class="meta">Box 1.4.3 · Process 18 · Roles: AO schedule · EMP rectify · DH recommend · CHRMO commit</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span class="on">Work Schedule</span><span>DTR Rectification</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="in sel">Nov 2026</span><span class="in sel">City Engineering</span><span class="right btn">⬆ Import XLSX</span><span class="btn p">Publish to DTR</span></div>
+      <div class="scroll"><table>
+        <tr><th>Employee</th><th>Shift</th><th>M</th><th>T</th><th>W</th><th>Th</th><th>F</th><th>Sa</th><th>Su</th></tr>
+        <tr><td>Dela Cruz, J.</td><td>Flexi 7–4 / 9–6</td><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td><td>–</td><td>–</td></tr>
+        <tr><td>Uy, K.</td><td>Rotation B</td><td>N</td><td>N</td><td>–</td><td>–</td><td>N</td><td>N</td><td>N</td></tr></table></div>
+      <div class="box dash" style="margin-top:8px"><div class="t">DTR Rectification form (other tab) <span class="n">1</span></div>
+        <div class="g4"><div class="fld"><div class="lbl">Date</div><div class="in">10/14</div></div><div class="fld"><div class="lbl">Missing punch</div><div class="in sel">Time-out</div></div><div class="fld"><div class="lbl">Reason</div><div class="in sel">Device offline</div></div><div class="fld"><div class="lbl">Proof</div><div class="ph" style="height:24px"><span>locator slip</span></div></div></div>
+        <div class="row"><span class="right btn p">Submit to DH</span></div></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Rectification goes EMP → DH recommendation → CHRMO commit. Once committed it corrects the punch and clears any tardiness or AWOL flag it caused.</li>
+      <li>Publishing the schedule feeds the DTR engine that tardiness and undertime are computed against.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 21 HOLIDAYS ================= -->
+<section class="screen" id="s21" data-nav="hol" data-role="HR Admin">
+  <header><h2>21 · Holiday Calendar &amp; Collision Restoration</h2><span class="meta">Settings · Process 12 · Role: CHRMO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="g2">
+        <div class="box"><div class="t">November 2026</div><div class="ph" style="height:170px"><span>month calendar grid · holidays marked</span></div></div>
+        <div class="box"><div class="t">Declare holiday</div>
+          <div class="fld"><div class="lbl">Name</div><div class="in">Special non-working day</div></div>
+          <div class="g2"><div class="fld"><div class="lbl">Date</div><div class="in">11/02/2026</div></div><div class="fld"><div class="lbl">Coverage <span class="n">1</span></div><div class="in sel">Full day</div></div></div>
+          <div class="fld"><div class="lbl">Proclamation / Order No.</div><div class="in">Proc. No. ___</div></div>
+          <div class="row"><span class="right btn p">Save &amp; scan collisions</span></div></div>
+      </div>
+      <div class="box"><div class="t">Collision preview – 7 approved leaves affected <span class="n">2</span></div>
+        <table><tr><th>Employee</th><th>App</th><th>Type</th><th>Restore</th><th>DTR flag</th></tr>
+        <tr><td>Dela Cruz, J.</td><td>LA-0412</td><td>VL</td><td>+1.000 VL</td><td>Holiday (paid)</td></tr>
+        <tr><td>Santos, M.</td><td>LA-0415</td><td>VL</td><td>+1.000 VL</td><td class="red">Half-day → UT 4h</td></tr></table>
+        <div class="row" style="margin-top:6px"><span class="right btn p">Apply restorations</span></div></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Full day restores 1.0 day. Half day also restores the full 1.0 day, then flags undertime or tardiness for the session the holiday didn't cover, shown in red.</li>
+      <li>CHRMO sees a preview before anything is applied. Affected employees and AOs are notified.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 22 OIC ================= -->
+<section class="screen" id="s22" data-nav="oic" data-role="HR Admin">
+  <header><h2>22 · Alternate Signatory (OIC) Management</h2><span class="meta">Box 1.2.2.2 · Role: CHRMO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="box"><div class="t">Active delegations <span class="n">1</span></div>
+        <table><tr><th>Principal</th><th>OIC</th><th>Office Order</th><th>Since</th><th>Status</th><th></th></tr>
+        <tr><td>City Mayor</td><td>Vice Mayor A. B.</td><td>OO 2026-077</td><td>10/18</td><td>ACTIVE</td><td><span class="btn">Revoke</span></td></tr></table></div>
+      <div class="box"><div class="t">New delegation</div>
+        <div class="g3"><div class="fld"><div class="lbl">Principal official</div><div class="in sel">City Mayor</div></div><div class="fld"><div class="lbl">Designated OIC</div><div class="in sel">Search employee…</div></div><div class="fld"><div class="lbl">Office Order No.</div><div class="in">OO ____</div></div></div>
+        <div class="fld"><div class="lbl">Office Order file ✱</div><div class="ph" style="height:30px"><span>upload</span></div></div>
+        <div class="box dash"><div class="t">Signature preview <span class="n">2</span></div><i>For: Hon. [Mayor Name], City Mayor by [OIC Name], OO 2026-077</i></div>
+        <div class="row"><span class="right btn p">Activate</span></div></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Revocation is manual only. There's no end date field, so a delegation stays active until CHRMO clicks Revoke.</li>
+      <li>This exact line is printed on CS Form 6 and on recall memos signed by the OIC.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 23 ALERTS ================= -->
+<section class="screen" id="s23" data-nav="alerts" data-role="HR Admin">
+  <header><h2>23 · Alerts – AWOL &amp; NOSI Postponement</h2><span class="meta">Integrations 6.1 / 6.2 · Process 19, 20 · Role: CHRMO (Comp &amp; Benefits)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="tabs"><span class="on">AWOL (2)</span><span>NOSI adjustments (3)</span><span>Service Record sync</span></div>
+      <div class="warn"><b>⚠ CRITICAL · Bautista, L. — 20 AWOL days in Oct 2026</b> <span class="n">1</span>
+        <div class="row" style="margin-top:6px"><span class="btn">View DTR</span><span class="btn">Return-to-Work Order (draft)</span><span class="btn">Notice of Dropping (draft)</span><span class="right btn p">Mark served</span></div>
+        <div class="muted">5-day explanation timer starts once served.</div></div>
+      <div class="box"><div class="t">NOSI postponement (preview of other tab) <span class="n">2</span></div>
+        <table><tr><th>Employee</th><th>LWOP in 3-yr window</th><th>Original NOSI</th><th>Adjusted NOSI</th><th></th></tr>
+        <tr><td>Santos, M.</td><td>30 d</td><td>01/15/2026</td><td><b>02/14/2026</b></td><td><span class="btn">Acknowledge</span></td></tr></table></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>The 20-day AWOL threshold raises a high-priority alert with auto-drafted notices. After the timer, CHRMO either converts the absence to leave or recommends dropping from the rolls to the Mayor.</li>
+      <li>Shown only when cumulative LWOP is at least 15 days: adjusted date = original + LWOP days.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 24 LEAVE TYPE SETUP LIST ================= -->
+<section class="screen" id="s24" data-nav="ltsetup" data-role="HR Admin">
+  <header><h2>24 · Leave Type Setup – List</h2><span class="meta">Settings · feeds 1.1.1 catalog, 1.1.2 single pane, 1.2.2 form · Role: CHRMO (CRUD)</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">Leave Types</span><span class="in">🔍 Search</span><span class="in sel">Status: All</span><span class="btn p">+ New Leave Type</span></div>
+      <div class="row" style="margin-bottom:8px"><span class="chip on">All (16)</span><span class="chip">Built-in statutory (15)</span><span class="chip">Custom (1)</span><span class="chip">Draft</span><span class="chip">Inactive</span></div>
+      <div class="scroll"><table>
+        <tr><th>Code</th><th>Name</th><th>Category</th><th>Source <span class="n">1</span></th><th>Track</th><th>Allocation</th><th>Effective</th><th>Ver.</th><th>Status</th><th></th></tr>
+        <tr><td>VL</td><td>Vacation Leave</td><td>Basic &amp; Mandatory</td><td>Built-in 🔒</td><td>A</td><td>1.25 d / mo</td><td>—</td><td>v1</td><td>Active</td><td><span class="btn">View</span></td></tr>
+        <tr><td>SL</td><td>Sick Leave</td><td>Basic &amp; Mandatory</td><td>Built-in 🔒</td><td>A</td><td>1.25 d / mo</td><td>—</td><td>v1</td><td>Active</td><td><span class="btn">View</span></td></tr>
+        <tr><td>SPL</td><td>Special Privilege Leave</td><td>Special &amp; Family</td><td>Built-in 🔒</td><td>A</td><td>3 d / yr</td><td>—</td><td>v2</td><td>Active</td><td><span class="btn">Edit</span></td></tr>
+        <tr><td colspan="10" class="muted">… 12 more built-in types</td></tr>
+        <tr><td><b>WL</b></td><td><b>Wellness Leave</b></td><td>Special &amp; Family</td><td>Custom</td><td>A</td><td>5 d / yr</td><td>01/01/2027</td><td>v1</td><td>Draft</td><td><span class="btn">Edit</span><span class="btn">Activate</span></td></tr>
+      </table></div>
+      <div class="box dash" style="margin-top:8px"><div class="t">Row actions <span class="n">2</span></div>
+        <div class="row"><span class="btn">Edit</span><span class="btn">Duplicate as new</span><span class="btn">Deactivate</span><span class="btn">Version history</span></div></div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li><b>Built-in</b> types already have their rules coded in the system (accrual, Tables I–IV, monetization guards). For these, CHRMO can edit only the descriptive fields: instructions, attachments, and legal-basis text. <b>Custom</b> types are fully editable.</li>
+      <li>"Duplicate" is the fastest way to create a new leave type that resembles an existing one (e.g. copy SPL to start a "Wellness Leave").</li>
+      <li>Types are deactivated, never deleted. Past applications and ledger lines keep pointing to the version that applied when they were filed.</li>
+    </ol></aside>
+  </div>
+</section>
+
+<!-- ================= 25 LEAVE TYPE BUILDER ================= -->
+<section class="screen" id="s25" data-nav="ltsetup" data-role="HR Admin">
+  <header><h2>25 · Create / Edit Leave Type (Builder)</h2><span class="meta">Settings · uses the common attributes from 07A as its schema · Role: CHRMO</span></header>
+  <div class="body">
+    <div class="frame"><div class="tpl">
+      <div class="row" style="margin-bottom:8px"><span class="big grow">New Leave Type · Wellness Leave</span><span class="chip">Draft · v1</span></div>
+      <div class="steps"><div class="done">1 Identity</div><div class="done">2 Coverage</div><div class="cur">3 Entitlement</div><div>4 Filing rules</div><div>5 Requirements</div><div>6 Form fields</div><div>7 Approval</div><div>8 Review</div></div>
+
+      <div class="g2">
+        <div class="box"><div class="t">1 · Identity &amp; legal basis <span class="n">1</span></div>
+          <div class="g2"><div class="fld"><div class="lbl">Leave name ✱</div><div class="in">Wellness Leave</div></div><div class="fld"><div class="lbl">Code ✱</div><div class="in">WL</div></div></div>
+          <div class="g2"><div class="fld"><div class="lbl">Category (single-pane group) ✱</div><div class="in sel">Special Privileges &amp; Family</div></div><div class="fld"><div class="lbl">Effectivity date ✱</div><div class="in">01/01/2027 📅</div></div></div>
+          <div class="fld"><div class="lbl">Legal basis ✱</div><div class="in">CSC MC No. __, s. 20__</div></div>
+          <div class="fld"><div class="lbl">Issuance file</div><div class="ph" style="height:28px"><span>upload circular PDF</span></div></div>
+          <div class="fld"><div class="lbl">Description / instructions (shown in 1.1.1.1)</div><div class="in ta">…</div></div>
+        </div>
+        <div class="box"><div class="t">2 · Coverage / eligibility <span class="n">2</span></div>
+          <div class="fld"><div class="lbl">Personnel track</div><div>☑ Track A (Plantilla/Casual/Contractual) ☐ Track B (COS/JO)</div></div>
+          <div class="fld"><div class="lbl">Appointment status</div><div>☑ Permanent ☑ Temporary ☑ Casual ☑ Contractual</div></div>
+          <div class="fld"><div class="lbl">Sex</div><div>(•) All ( ) Female only ( ) Male only</div></div>
+          <div class="g2"><div class="fld"><div class="lbl">Min. length of service</div><div class="row"><span class="in" style="min-width:50px">0</span><span class="in sel" style="min-width:70px">months</span></div></div>
+          <div class="fld"><div class="lbl">Max occurrences (lifetime)</div><div class="in">— (no limit)</div></div></div>
+          <div class="fld"><div class="lbl">Other condition (needs proof)</div><div class="in sel">None / Married / Solo parent ID / Calamity zone…</div></div>
+        </div>
+      </div>
+
+      <div class="box" style="border-width:2px"><div class="t">3 · Entitlement, crediting &amp; charging <span class="n">3</span></div>
+        <div class="g4">
+          <div class="fld"><div class="lbl">Allocation ✱</div><div class="in">5</div></div>
+          <div class="fld"><div class="lbl">Unit ✱</div><div class="in sel">Working days</div></div>
+          <div class="fld"><div class="lbl">Per ✱</div><div class="in sel">Calendar year</div></div>
+          <div class="fld"><div class="lbl">Crediting mode ✱</div><div class="in sel">Annual reset (Jan 1)</div></div>
+        </div>
+        <div class="muted" style="font-size:11px;margin-bottom:6px">Unit: working days · calendar days · hours · months &nbsp;|&nbsp; Per: month (accrual) · year · event · lifetime &nbsp;|&nbsp; Mode: monthly accrual · annual reset · on approval (lifecycle) · manual batch (like SEL)</div>
+        <div class="g4">
+          <div class="fld"><div class="lbl">Charged against ✱</div><div class="in sel">Own balance (WL)</div></div>
+          <div class="fld"><div class="lbl">Pay status</div><div class="in sel">With pay</div></div>
+          <div class="fld"><div class="lbl">Earns VL/SL while on leave?</div><div>(•) Yes ( ) No</div></div>
+          <div class="fld"><div class="lbl">If balance is short</div><div class="in sel">Block filing</div></div>
+        </div>
+        <div class="g4">
+          <div class="fld"><div class="lbl">Cumulative (carry over)?</div><div>( ) Yes (•) No</div></div>
+          <div class="fld"><div class="lbl">Unused at year-end</div><div class="in sel">Forfeit</div></div>
+          <div class="fld"><div class="lbl">Commutable / monetizable?</div><div>( ) Yes (•) No</div></div>
+          <div class="fld"><div class="lbl">On activation</div><div class="in sel">Credit all eligible now</div></div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="box dash"><div class="t">4 · Filing rules <span class="n">4</span></div>
+          <div class="g2"><div class="fld"><div class="lbl">Filing window</div><div class="in sel">In advance</div></div><div class="fld"><div class="lbl">Days</div><div class="in">5</div></div></div>
+          <div class="fld"><div class="lbl">Late filing</div><div>(•) Allow with LATE FILING watermark ( ) Block</div></div>
+          <div class="g2"><div class="fld"><div class="lbl">Min days / application</div><div class="in">1</div></div><div class="fld"><div class="lbl">Max consecutive days</div><div class="in">5</div></div></div>
+          <div class="fld"><div class="lbl">Can be combined with other leave?</div><div>(•) Yes ( ) No</div></div>
+        </div>
+        <div class="box dash"><div class="t">5 · Required attachments <span class="n">5</span></div>
+          <table><tr><th>Document</th><th>Required when</th><th></th></tr>
+          <tr><td>Medical / wellness certificate</td><td class="in sel" style="border:none">If &gt; 3 days</td><td>✕</td></tr>
+          <tr><td colspan="3"><span class="btn">+ Add document</span></td></tr></table>
+        </div>
+      </div>
+
+      <div class="box dash"><div class="t">6 · Application form fields (6.B slot) <span class="n">6</span></div>
+        <div class="g2">
+          <div>
+            <table><tr><th>Label</th><th>Type</th><th>Req.</th><th>Options</th><th></th></tr>
+            <tr><td>Purpose</td><td>Dropdown</td><td>☑</td><td>Mental health · Physical check-up · Rest</td><td>↕ ✕</td></tr>
+            <tr><td>Remarks</td><td>Text area</td><td>☐</td><td>—</td><td>↕ ✕</td></tr>
+            <tr><td colspan="5"><span class="btn">+ Add field</span> <span class="muted">text · number · date · dropdown · radio · checkbox · file</span></td></tr></table>
+          </div>
+          <div class="box" style="margin:0"><div class="t">Live preview (as seen on 07B section D)</div>
+            <div class="fld"><div class="lbl">Reason / details ✱</div><div class="in">…</div></div>
+            <div class="fld"><div class="lbl">Purpose ✱</div><div class="in sel">Select</div></div>
+            <div class="fld"><div class="lbl">Remarks</div><div class="in ta"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="box dash"><div class="t">7 · Approval &amp; post-approval <span class="n">7</span></div>
+          <div class="fld"><div class="lbl">Routing</div><div>(•) Standard 5-tier (per routing matrix) ( ) Shortened: AO → DH only</div></div>
+          <div>☐ Recallable (like VL/FL) ☑ Cancellable ☑ Reschedulable ☐ Confidential (mask like VAWC)</div>
+        </div>
+        <div class="box dash"><div class="t">Outputs <span class="n">8</span></div>
+          <div class="fld"><div class="lbl">CS Form 6 · 6.A printout</div><div class="in sel">"Others: Wellness Leave"</div></div>
+          <div class="fld"><div class="lbl">Ledger</div><div class="in sel">Own column on Leave Ledger Card</div></div>
+          <div class="fld"><div class="lbl">MRATU / SRATU</div><div class="in sel">Not counted as absence</div></div>
+        </div>
+      </div>
+
+      <div class="row"><span class="btn">← Back</span><span class="btn">Save draft</span><span class="right btn">Preview catalog card &amp; form</span><span class="btn p">Next →</span></div>
+
+      <div class="modal"><div class="t"><span>8 · Review &amp; activate</span><span>✕</span></div>
+        <div>Wellness Leave (WL) · 5 working days / year · Track A · with pay · effective 01/01/2027</div>
+        <div style="margin:6px 0">On activation:</div>
+        <div>✔ Appears in Leave Types catalog (01) and File Leave dropdown (07B)</div>
+        <div>✔ New tile in Single Pane, "Special Privileges &amp; Family" group (03)</div>
+        <div>✔ 1,842 eligible employees credited 5 days on 01/01/2027</div>
+        <div class="fld" style="margin-top:6px"><div class="lbl">Office order / approval reference ✱</div><div class="in">OO 2026-___</div></div>
+        <div class="row"><span class="right btn">Back</span><span class="btn p">Activate</span></div>
+      </div>
+    </div></div>
+    <aside class="notes"><h4>Annotations</h4><ol>
+      <li>Steps 1–7 match the six attributes every leave type shares (07A), plus the form fields and routing. A new government issuance can be configured here without a code change.</li>
+      <li>The eligibility rules decide who sees the type in the catalog and who can file it (07B section H).</li>
+      <li>The core step. The allocation, unit, period and crediting mode together reproduce every existing pattern: 1.25/month accrual (VL/SL), yearly quota (SPL, Solo Parent), per event (SEL), on approval (ML/PL), and manual batch (calamity). Wellness Leave is just a yearly quota.</li>
+      <li>Drives the filing-window check and the LATE FILING watermark.</li>
+      <li>Feeds the attachment checklist on 02 and 07B.</li>
+      <li>A field builder for the type-specific slot. The preview shows exactly how section D of 07B will look.</li>
+      <li>Defaults to the standard routing matrix. The recall, cancel and reschedule switches decide which actions appear on 12 and 13.</li>
+      <li>Decides how the new type appears on the printed CS Form 6 (the "Others" line), the ledger and the compliance reports.</li>
+      <li>Activation requires an office order reference and is audit-logged. Later edits create v2 with a new effectivity date, and earlier applications keep the version they were filed under.</li>
+    </ol></aside>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  // Wrap each screen's content in the shared app shell and mark the active nav item.
+  const shell = document.getElementById('shell');
+  document.querySelectorAll('.screen[data-nav]').forEach(sec => {
+    const frame = sec.querySelector('.frame');
+    const inner = frame.querySelector('.tpl');
+    const node = shell.content.cloneNode(true);
+    node.querySelector('.role').textContent = sec.dataset.role || 'Employee';
+    const on = node.querySelector(`[data-k="${sec.dataset.nav}"]`);
+    if (on) on.classList.add('on');
+    node.querySelector('.content').append(...inner.childNodes);
+    frame.replaceChildren(node);
+  });
+</script>
+</body>
+</html>
